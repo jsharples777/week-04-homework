@@ -1,0 +1,77 @@
+.App {
+  flex-flow: row;
+  align-content: space-between;
+}
+
+header h1 {
+  text-align: center;
+}
+
+.content {
+  padding: 60px 60px 60px 60px;
+  text-align: center;
+}
+
+.answer {
+  background: chocolate;
+  color: white;
+  border: 1px;
+  border-radius: 3px;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 10px;
+}
+
+#scoreDisplayDiv ul li {
+  background: chocolate;
+  color: white;
+  border: 1px;
+  border-radius: 3px;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.answer:hover {
+  background: coral;
+}
+
+.answerList {
+  text-align: left;
+}
+
+.questionAndAnswers {
+  border-style: solid;
+  box-shadow: #282c34;
+}
+
+.timer {
+  color: blue;
+  font-size: 20pt;
+  text-align: right;
+}
+
+.linkToOtherSection {
+  color: blue;
+  font-size: 16pt;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.linkToHighScores:hover {
+  cursor:pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
