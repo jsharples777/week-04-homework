@@ -198,6 +198,7 @@ class App {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    logger.debugOn = false;
     logger.log("Document loaded - starting application setup");
     let app = new App();
     app.initialise();
