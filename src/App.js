@@ -68,13 +68,13 @@ class App {
         startQuizButtonView.style.display = "none";
         /* now display the first question */
         let question = this.controller.getNextQuestion();
-        logger.log(question,2);
+        logger.log(question, 2);
         this.updateQuestionDisplay(question);
     }
 
 
     callbackTimerRanOut() {
-        logger.log("Timer ran out",1);
+        logger.log("Timer ran out", 1);
         this.quizState = 2;
         let score = 0;
         this.callbackQuestionsFinished(score);
@@ -102,9 +102,12 @@ class App {
         /* show the high score submission */
         this.addHighScoreView.style.display = "block";
         this.answerFeedbackView.style.display = "block";
+        /* hide the question display */
+        this.questionDisplayView.style.display = "none";
+
         setTimeout(() => {
             this.answerFeedbackView.style.display = "none";
-        },2000);
+        }, 2000);
         /* show the user their score */
         let scoreDisplayView = this.addHighScoreView.querySelector("#scoreDisplay");
         scoreDisplayView.innerHTML = "The quiz is finished, you scored " + score + ".  Add your name to the high scores.";
@@ -114,7 +117,8 @@ class App {
         /* let the controller manage the user submission */
     }
 
-    /* private */ resetDisplay(showQuiz = true) {
+    /* private */
+    resetDisplay(showQuiz = true) {
         this.updateQuestionDisplay(null);
         let quizViewsDisplayStyle = "block";
         let highScoreViewsDisplayStyle = "none";
@@ -140,7 +144,8 @@ class App {
         this.gotoSectionView.innerHTML = gotoSectionText;
     }
 
-    /* private */ showHighScores() {
+    /* private */
+    showHighScores() {
         let highScores = this.controller.getHighScores();
         /* remove the previous list */
         this.scoreListView.querySelectorAll('*').forEach(scoreItem => scoreItem.remove());
@@ -156,7 +161,6 @@ class App {
     }
 
 
-
     callbackShowOtherSection() {
         logger.log("Show the other section", 1);
         if (this.currentlyShowingQuiz) {
@@ -164,8 +168,7 @@ class App {
             logger.log("Showing highscores");
             this.resetDisplay(false);
             this.showHighScores();
-        }
-        else {
+        } else {
             logger.log("Show quiz");
             /* user wants to go back to the quiz */
             this.resetDisplay(true);
@@ -173,19 +176,19 @@ class App {
     }
 
     callbackUpdateTimerDisplay(timeRemaining) {
-        logger.log("Update timer display " + timeRemaining, 5);
+        logger.log("Update timer display " + timeRemaining, 100);
         this.timerView.innerHTML = timeRemaining + " s";
     }
 
     callbackResetQuizDisplay() {
-        logger.log("Resetting quiz display",1);
+        logger.log("Resetting quiz display", 1);
         /* show the base test and button to start the quiz */
         this.resetDisplay(true);
     }
 
     callbackProvideAnswerFeedback(isCorrect = false) {
         let spanTextView = this.answerFeedbackView.querySelector("span");
-        spanTextView.innerText = (isCorrect)?"Previous answer was Correct":" Previous answer was Incorrect";
+        spanTextView.innerText = (isCorrect) ? "Previous answer was Correct" : " Previous answer was Incorrect";
         /* get the feedback to appear */
         this.answerFeedbackView.style.display = "block";
     }
@@ -194,8 +197,8 @@ class App {
 }
 
 
-document.addEventListener('DOMContentLoaded',() => {
-logger.log("Document loaded - starting application setup");
-let app = new App();
-app.initialise();
+document.addEventListener('DOMContentLoaded', () => {
+    logger.log("Document loaded - starting application setup");
+    let app = new App();
+    app.initialise();
 });

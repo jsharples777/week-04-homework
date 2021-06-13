@@ -1,77 +1,126 @@
 .App {
-  flex-flow: row;
-  align-content: space-between;
+    flex-flow: row;
+    align-content: space-between;
+}
+
+header {
+    background: darkgoldenrod;
+    color:white;
 }
 
 header h1 {
-  text-align: center;
+    text-align: center;
 }
 
-.content {
-  padding: 60px 60px 60px 60px;
-  text-align: center;
-}
-
-.answer {
-  background: chocolate;
-  color: white;
-  border: 1px;
-  border-radius: 3px;
-  padding: 10px 10px 10px 10px;
-  margin-bottom: 10px;
-}
-
-#scoreDisplayDiv ul li {
-  background: chocolate;
-  color: white;
-  border: 1px;
-  border-radius: 3px;
-  padding: 10px 10px 10px 10px;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-.answer:hover {
-  background: coral;
-}
-
-.answerList {
-  text-align: left;
-}
-
-.questionAndAnswers {
-  border-style: solid;
-  box-shadow: #282c34;
-}
-
-.timer {
-  color: blue;
-  font-size: 20pt;
-  text-align: right;
+h4 {
+    font-size: 16pt;
 }
 
 .linkToOtherSection {
-  color: blue;
-  font-size: 16pt;
-  text-align: left;
-  text-decoration: underline;
+    font-size: 16pt;
+    text-align: left;
 }
 
-.linkToHighScores:hover {
-  cursor:pointer;
+.linkToOtherSection:hover {
+    cursor: pointer;
 }
+
+.timer {
+    font-size: 18pt;
+    text-align: right;
+}
+
+.content {
+    padding: 60px 60px 60px 60px;
+    text-align: center;
+}
+
+#questionDisplayView {
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#answers {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.scoreListCard {
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+button:hover {
+    box-shadow: 0 0 10px rgb(35 173 255);
+    cursor: pointer;
+}
+
+button {
+    background:wheat;
+    height: 40px;
+    width: 150px;
+    line-height: 20px;
+    text-align: center;
+    border: 2px solid #dd;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 20%);
+    transition: all 200ms ease-out;
+}
+
+#resetScores {
+    margin-top:30px;
+}
+
+
+
+.answerList {
+    text-align: left;
+}
+
+.questionAndAnswers {
+    border-style: solid;
+    box-shadow: #282c34;
+}
+
+
+.answer {
+    background: chocolate;
+    color: white;
+    border: 1px;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+}
+
+.answer:hover {
+    background: coral;
+}
+
+.answerFeedback {
+    text-align: center;
+    font-size:14pt;
+}
+
+#scoreDisplayDiv ul li {
+    background: chocolate;
+    color: white;
+    border: 1px;
+    border-radius: 3px;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+#scoreList {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
 
 .hidden {
-  display: none;
+    display: none;
 }
 
 
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

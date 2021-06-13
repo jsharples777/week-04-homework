@@ -30,9 +30,9 @@ class Controller {
         this.handleGotoSection = this.handleGotoSection.bind(this);
         goToSectionView.addEventListener('click', this.handleGotoSection);
         this.handleAddScore = this.handleAddScore.bind(this);
-        addScoreFormView.addEventListener('submit',this.handleAddScore);
+        addScoreFormView.addEventListener('submit', this.handleAddScore);
         this.handleResetScores = this.handleResetScores.bind(this);
-        resetScoresButton.addEventListener('click',this.handleResetScores);
+        resetScoresButton.addEventListener('click', this.handleResetScores);
     }
 
     resetQuestions() {
@@ -54,15 +54,15 @@ class Controller {
                 randomisedAnswers.push(question.answers[index]);
             }
         }
-        logger.log("Randomised answers to question " + question.id,5);
-        logger.log(randomisedAnswers,5);
+        logger.log("Randomised answers to question " + question.id, 5);
+        logger.log(randomisedAnswers, 5);
         return randomisedAnswers;
     }
 
     randomiseQuestionsAndAnswers(questions) {
         /* simple randomise - just pick a question and start from there in the array and loop through */
         let randomQuestionIndex = Math.floor(Math.random() * questions.length);
-        logger.log("Start questions from " + randomQuestionIndex,5);
+        logger.log("Start questions from " + randomQuestionIndex, 5);
         let randomisedQuestions = [];
         /* get the questions from the index to the end of the array */
         for (let index = randomQuestionIndex; index < questions.length; index++) {
@@ -73,16 +73,17 @@ class Controller {
                 randomisedQuestions.push(questions[index]);
             }
         }
-        logger.log("Randomised questions are: ",5);
-        logger.log(randomisedQuestions,5);
+        logger.log("Randomised questions are: ", 5);
+        logger.log(randomisedQuestions, 5);
         /* randomise the answers in each question */
         for (let i = 0; i < randomisedQuestions.length; i++) {
             let question = randomisedQuestions[i];
-            logger.log(question);
-            questions.answers = this.randomiseAnswers(question);
+            logger.log("Randomising answers to question " + question.id,5);
+            logger.log(question,5);
+            question.answers = this.randomiseAnswers(question);
+            logger.log("After randomising answers to question " + question.id,5);
+            logger.log(question,5);
         }
-
-        logger.log("Randomised questions are answers to " + questions,5);
 
         return randomisedQuestions;
     }
@@ -91,7 +92,6 @@ class Controller {
         /* initialise the questions first */
         if (this.questions.length === 0) {
             this.questions = this.randomiseQuestionsAndAnswers(this.dataModel.getQuestions());
-            //this.questions = this.dataModel.getQuestions();
             this.currentQuestionIndex = 0;
         }
     }
@@ -102,6 +102,7 @@ class Controller {
         /* get the next question in the list */
         if (!(this.currentQuestionIndex > (this.questions.length - 1))) {
             nextQuestion = this.questions[this.currentQuestionIndex];
+            logger.log(nextQuestion);
             this.currentQuestionIndex++;
         } else {
             /* we are out of questions */
@@ -161,6 +162,9 @@ class Controller {
                 this.stopTimer();
                 /* let the view know */
                 this.applicationView.callbackTimerRanOut();
+                /* reset the state of the controller */
+                this.resetTimer();
+                this.resetQuestions();
             }
             /* ask the view to update the timer display */
             this.applicationView.callbackUpdateTimerDisplay(this.timeRemaining);
@@ -169,13 +173,13 @@ class Controller {
 
 
     handleAnswerSelection(event) {
-        logger.log("Checking for answer selection",2);
+        logger.log("Checking for answer selection", 2);
         // did we click on an answer
         if (event.target.className === "answer") {
             // was it the correct answer?
             let value = event.target.getAttribute("iscorrect");
             if (value !== "true") {
-                logger.log("Clicked incorrect answer",3);
+                logger.log("Clicked incorrect answer", 3);
                 /* penalise the timer */
                 this.applyTimePenalty();
             }
@@ -187,7 +191,7 @@ class Controller {
     }
 
     handleStartQuiz(event) {
-        logger.log("Handle start quiz",2);
+        logger.log("Handle start quiz", 2);
         /* start a timer */
         this.startTimer();
         /* let the view know about the state change */
@@ -196,34 +200,31 @@ class Controller {
     }
 
     handleGotoSection(event) {
-        logger.log("Showing other section of the site",2);
+        logger.log("Showing other section of the site", 2);
         this.stopTimer();
         /* update the state of the view to let them know about the high score view */
         this.applicationView.callbackShowOtherSection();
     }
 
     handleAddScore(event) {
-        logger.log("handling adding score to high scores",2)
+        logger.log("handling adding score to high scores", 2)
         event.preventDefault();
-        logger.log(event.target,5);
         /* has the user put something in the name field */
         let view = event.target; // should be the form object
         let nameView = view.querySelector("#nameText");
-        logger.log("name: " + nameView.value,4);
         /* if there is no name, we are assuming they don't want to save their score */
         if (nameView.value != "") {
             /* get the score out of the hidden details */
             let hiddenScoreView = view.querySelector("#score");
             let score = parseInt(hiddenScoreView.getAttribute("value"));
-            logger.log("score: " + score,4);
-            this.dataModel.addNewHighScore(score,nameView.value);
+            this.dataModel.addNewHighScore(score, nameView.value);
         }
         this.applicationView.callbackResetQuizDisplay();
 
     }
 
     handleResetScores(event) {
-        logger.log("Handling resetting scores",2);
+        logger.log("Handling resetting scores", 2);
         event.preventDefault();
         /* clear the scores from the model */
         this.dataModel.resetHighScores();
