@@ -1,14 +1,18 @@
 import {Answer, HighScore, Question} from './DataTypes.js';
 import logger from './SimpleDebug.js';
+import ObjectDataSourceDelegate from "./ObjectDataSourceDelegate.js";
 
 class DataModel {
     simpleStorage = null;
     currentHighScores = [];
     questions = [];
+    dataSourceDelegate = null;
 
     highScoreKey = "highScores";
 
     constructor(simpleStorage = {}) {
+        this.dataSourceDelegate = new ObjectDataSourceDelegate();
+        //this.dataSourceDelegate = new FileDataSourceDelegate();
         this.initialise(simpleStorage);
     }
 
@@ -21,26 +25,7 @@ class DataModel {
     }
 
     loadQuestions() {
-        logger.log("Loading Questions", 5);
-        let answer1 = new Answer(1, "test1 - not correct");
-        let answer2 = new Answer(2, "test2 - not correct");
-        let answer3 = new Answer(3, "test3 - correct", true);
-        let answer4 = new Answer(4, "test4 - not correct");
-        let question = new Question(1, "This is a test 1", [answer1, answer2, answer3, answer4]);
-        this.questions.push(question);
-        answer1 = new Answer(1, "test1 - not correct");
-        answer2 = new Answer(2, "test2 - correct", true);
-        answer3 = new Answer(3, "test3 - not correct");
-        answer4 = new Answer(4, "test4 - not correct");
-        question = new Question(2, "This is a test 2", [answer1, answer2, answer3, answer4]);
-        this.questions.push(question);
-        answer1 = new Answer(1, "test1 - correct", true);
-        answer2 = new Answer(2, "test2 - not correct");
-        answer3 = new Answer(3, "test3 - not correct");
-        answer4 = new Answer(4, "test4 - not correct");
-        question = new Question(3, "This is a test 3", [answer1, answer2, answer3, answer4]);
-        this.questions.push(question);
-        logger.log(this.questions, 5);
+        return this.dataSourceDelegate.loadQuestions();
     }
 
     loadHighScores() {
@@ -116,7 +101,7 @@ class DataModel {
         /* assume a stringified storage with JSON format */
         this.simpleStorage = simpleStorage;
         /* create the questions */
-        this.loadQuestions();
+        this.questions = this.loadQuestions();
         /* load the high scores from local data */
         this.loadHighScores();
     }

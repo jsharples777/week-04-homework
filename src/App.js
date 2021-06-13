@@ -50,7 +50,7 @@ class App {
             this.questionView.innerHTML = question.question;
             for (let index = 0; index < question.answers.length; index++) {
                 let answer = question.answers[index];
-                let displayAnswerText = index + ". " + answer.answer;
+                let displayAnswerText = (index+1) + ". " + answer.answer;
                 let answerItem = document.createElement("li");
                 answerItem.setAttribute("class", "answer");
                 answerItem.setAttribute("iscorrect", answer.isCorrect);
@@ -110,7 +110,7 @@ class App {
         }, 2000);
         /* show the user their score */
         let scoreDisplayView = this.addHighScoreView.querySelector("#scoreDisplay");
-        scoreDisplayView.innerHTML = "The quiz is finished, you scored " + score + ".  Add your name to the high scores.";
+        scoreDisplayView.innerHTML = "The quiz is finished, you scored " + score + ".  You may add your name to the high scores.";
         /* add the score to the form data */
         let hiddenScoreView = this.addHighScoreView.querySelector("#score");
         hiddenScoreView.setAttribute("value", score);
