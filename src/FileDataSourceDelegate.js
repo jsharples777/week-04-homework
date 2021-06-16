@@ -1,19 +1,19 @@
 import {Answer,Question} from './DataTypes.js';
 import DataSource from "./DataSource.js";
 import logger from "./SimpleDebug.js";
+import data from "../data/questions.js";
 
 
-class ObjectDataSourceDelegate extends DataSource {
+class FileDataSourceDelegate extends DataSource {
     constructor() {
         super();
     }
 
     loadQuestions() {
-        let questions = [];
         logger.log("Loading Questions", 5);
-        let questionsFile = new File()
-        JSON.stringify()
-
-        return questions;
+        logger.log(data);
+        return data;
     }
 }
+
+export default FileDataSourceDelegate;

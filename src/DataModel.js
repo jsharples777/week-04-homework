@@ -1,6 +1,7 @@
 import {Answer, HighScore, Question} from './DataTypes.js';
 import logger from './SimpleDebug.js';
 import ObjectDataSourceDelegate from "./ObjectDataSourceDelegate.js";
+import FileDataSourceDelegate from "./FileDataSourceDelegate.js";
 
 class DataModel {
     simpleStorage = null;
@@ -11,8 +12,8 @@ class DataModel {
     highScoreKey = "highScores";
 
     constructor(simpleStorage = {}) {
-        this.dataSourceDelegate = new ObjectDataSourceDelegate();
-        //this.dataSourceDelegate = new FileDataSourceDelegate();
+        //this.dataSourceDelegate = new ObjectDataSourceDelegate();
+        this.dataSourceDelegate = new FileDataSourceDelegate();
         this.initialise(simpleStorage);
     }
 
